@@ -69,7 +69,7 @@ const page = ({params}:any) => {
               {/* Contact Card */}
               <div className="relative h-80 rounded-lg overflow-hidden bg-gray-800 text-white flex flex-col justify-between p-6">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
+                  src=""
                   alt="Contact person"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
