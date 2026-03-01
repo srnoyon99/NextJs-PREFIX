@@ -164,30 +164,43 @@ export default function Navbar() {
                     <div className="lg:hidden bg-white border-t border-gray-200">
                         <div className="px-6 py-4 space-y-2">
                             {menuItems.map((item) => (
-                                <div key={item.label}>
-                                    <button
-                                        onClick={() => item.hasDropdown && toggleDropdown(item.label)}
-                                        className="w-full text-left px-4 py-3 text-gray-700 font-semibold hover:bg-orange-50 hover:text-orange-500 transition-colors flex items-center justify-between rounded-md"
-                                    >
-                                        {item.label}
-                                        {item.hasDropdown && (
-                                            <ChevronDown
-                                                size={16}
-                                                className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`}
-                                            />
-                                        )}
-                                    </button>
+                            <div key={item.label} className="relative group">
+                                <Link href={item.href}
+                                    className="px-4 py-2 text-gray-700 font-semibold text-sm hover:text-orange-500 transition-colors flex items-center gap-1 group-hover:text-orange-500"
+                                >
+                                    {item.label}
+                                    {item.hasDropdown && <ChevronDown size={16} className="group-hover:rotate-180 transition-transform" />}
+                                </Link>
 
-                                    {/* Mobile Dropdown */}
-                                    {item.hasDropdown && openDropdown === item.label && (
-                                        <div className="pl-4 space-y-2 mt-2">
-                                            <a href="#" className="block px-4 py-2 text-gray-600 hover:text-orange-500 text-sm">Option 1</a>
-                                            <a href="#" className="block px-4 py-2 text-gray-600 hover:text-orange-500 text-sm">Option 2</a>
-                                            <a href="#" className="block px-4 py-2 text-gray-600 hover:text-orange-500 text-sm">Option 3</a>
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                {/* Dropdown */}
+                                {item.hasDropdown && (
+                                    <div
+                                        className="
+                                            absolute left-0 top-full
+                                            w-48 bg-white rounded-md shadow-lg
+                                            opacity-0 invisible
+                                            group-hover:opacity-100 group-hover:visible
+                                            transition-all duration-200
+                                            py-2 z-50
+                                            "
+                                    >
+                                        {item.subMenu?.map((subItem, index) => (
+                                            <Link
+                                                key={index}
+                                                href={subItem.href}
+                                                className="
+                                                    block px-4 py-2 text-gray-700 text-sm
+                                                    hover:bg-orange-50 hover:text-orange-500
+                                                    transition-colors
+                                                    "
+                                            >
+                                                {subItem.label}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
 
                             {/* Mobile Help Section */}
                             <div className="px-4 py-3 mt-4 border-t border-gray-200">
